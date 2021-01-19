@@ -1,0 +1,66 @@
+{% extends 'start/index.html.twig' %}
+
+{% block content %}
+    <script>
+        $(document).ready(function(){
+            $('#form_new_category').modal("show");
+        });
+    </script>
+<div class="card">
+  <h5 class="card-header">
+          <div class='col-md-3'>
+        <a href='{{ path('category')}}' class='btn btn-default'>Volver</a>
+        </div>
+  Productos</h5>
+  <div class="card-body">
+
+        {{ form_start(form, {'action': path('product_form',{'id':id}), 'method': 'POST'}) }}
+            <div class='row'>
+                <div class='col-md-2'>
+                    <label>{{ field_label(form.code) }}</label>
+                    {{ form_widget(form.code) }}  
+                    {{ form_errors(form.code) }}                 
+                </div>
+                <div class='col-md-6'>
+                    <label>{{ field_label(form.name) }}</label>
+                    {{ form_widget(form.name) }}  
+                    {{ form_errors(form.name) }}                 
+                </div>
+                <div class='col-md-2'>
+                    <label>{{ field_label(form.mark) }}</label>
+                    {{ form_widget(form.mark) }}  
+                    {{ form_errors(form.mark) }}                 
+                </div>   
+                <div class='col-md-2'>
+                    <label>{{ field_label(form.price) }}</label>
+                    {{ form_widget(form.price) }}  
+                    {{ form_errors(form.price) }}                 
+                </div>                                                             
+            </div>
+            <div class='row'>
+                <div class='col-md-12'>
+                    <label>{{ field_label(form.description) }}</label>
+                    {{ form_widget(form.description) }}  
+                    {{ form_errors(form.description) }}                 
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2'>
+                    <label>{{ field_label(form.category) }}</label>
+                    {{ form_widget(form.category) }}  
+                    {{ form_errors(form.category) }}                 
+                </div>            
+            </div>
+            <div class='row'>
+                <div class='col-md-12'>
+                <br>
+                    {{ form_widget(form.save) }}
+                </div>               
+            </div>
+
+        {{ form_end(form) }}
+
+  </div>
+</div>  
+
+{% endblock %}

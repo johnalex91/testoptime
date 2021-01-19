@@ -1,0 +1,50 @@
+{% extends 'start/index.html.twig' %}
+
+{% block content %}
+    <script>
+        $(document).ready(function(){
+            $('#form_new_category').modal("show");
+        });
+    </script>
+<div class="card">
+  <h5 class="card-header">
+          <div class='col-md-3'>
+        <a href='{{ path('product')}}' class='btn btn-default'>Volver</a>
+        </div>
+  Categorias</h5>
+  <div class="card-body">
+
+        {{ form_start(form, {'action': path('category_form',{'id':id}), 'method': 'POST'}) }}
+            <div class='row'>
+                <div class='col-md-2'>
+                    <label>{{ field_label(form.code) }}</label>
+                    {{ form_widget(form.code) }}  
+                    {{ form_errors(form.code) }}                 
+                </div>
+                <div class='col-md-4'>
+                    <label>{{ field_label(form.name) }}</label>
+                    {{ form_widget(form.name) }}  
+                    {{ form_errors(form.name) }}                 
+                </div>
+                <div class='col-md-4'>
+                    <label>{{ field_label(form.description) }}</label>
+                    {{ form_widget(form.description) }}  
+                    {{ form_errors(form.description) }}                 
+                </div>
+                <div class='col-md-2'>
+                    <label>{{ field_label(form.active) }}</label>
+                    {{ form_widget(form.active) }}  
+                    {{ form_errors(form.active) }}                 
+                </div>   
+                <div class='col-md-12'>
+                <br>
+                    {{ form_widget(form.save) }}
+                </div>                                             
+            </div>
+
+        {{ form_end(form) }}
+
+  </div>
+</div>  
+
+{% endblock %}

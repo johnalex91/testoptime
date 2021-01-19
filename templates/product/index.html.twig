@@ -1,0 +1,138 @@
+{% extends 'start/index.html.twig' %}
+
+{% block content %}
+<div class="card">
+  <h5 class="card-header">Productos</h5>
+  <div class="card-body">
+        <div class='row'>
+            <div class='col-md-3'>
+            <a href='{{ path('product_form',{'id':0})}}' class='btn btn-primary'>Nuevo</a>
+            </div>
+        </div>
+        {{ form_start(form, {'action': path('product'), 'method': 'POST'}) }}
+        <div class='row'>
+                <div class='col-md-3'>
+                    <label>{{ field_label(form.name) }}</label>
+                    {{ form_widget(form.name) }}  
+                </div>
+                <div class='col-md-4'>
+                    <label>{{ field_label(form.order) }}</label>
+                    {{ form_widget(form.order) }}  
+                </div>  
+                <div class='col-md-3'>
+                    <label>{{ field_label(form.tipoorden) }}</label>
+                    {{ form_widget(form.tipoorden) }}  
+                </div>  
+                   
+                <div class='col-md-2'>
+                    <br>
+                    {{ form_widget(form.buscar) }}
+                </div>      
+        </div>                     
+        {{ form_end(form) }}
+        <br>
+
+
+    <div class='row'>
+        <div class='col-md-12'>
+            <table class='table table-bordered'>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for l in data %}
+                    <tr>
+                        <td>{{l.code}}</td>
+                        <td>{{l.name}}</td>
+                        <td>{{l.description}}</td>
+                        <td>{{l.category.name}}</td>
+                        <td>
+                            <a class='btn btn-danger'  onclick='del({{l.id}})'>Eliminar</a>
+                            <a class='btn btn-success' href='{{ path('product_form', {'id':l.id }) }}'>Editar</a>
+                            <button class='btn btn-primary'>Ver</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(data) }}
+            </div>            
+        </div>
+    </div>
+  </div>
+</div>
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        {% if message!=''%}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong></strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div> 
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+<script>
+
+function del(id){
+        Swal.fire({
+        title: 'Esta seguro que desea eliminar el Producto',
+        text: "El registro no se podrá recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            
+                $.ajax({
+                    type: "POST",
+                    url: '{{ app.request.getBaseURL() }}product/delete/'+id,
+                    data: {'id':id},
+                    beforeSend: function() {   
+
+                    },
+                    success: function(response) {
+                        if(response.success=='OK'){
+                            Swal.fire(
+                            'Eliminado!',
+                            'Proceso Correcto',
+                            'success'
+                            )
+                        $(location).attr('href','{{path('product')}}');
+                        }else{
+                            Swal.fire(
+                            'No Eliminado!',
+                            'Proceso Incorrecto',
+                            'error'
+                            )
+                        $(location).attr('href','{{path('product')}}');
+                        }
+                    },
+                    error: function() {
+                            Swal.fire(
+                            'No Eliminado!',
+                            'Proceso Incorrecto',
+                            'error'
+                            )                        
+                    }
+                });
+        }
+        })    
+}
+</script>
+
+
+{% endblock %}
