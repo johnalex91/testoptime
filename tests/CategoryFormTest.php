@@ -24,6 +24,9 @@ class CategoryFormTest extends TypeTestCase
         $this->assertEquals(2, $res);
     }
     
+    /*
+    * Valid generate form
+    */
     public function test_submit_form_category()
     {
         $formData = [
