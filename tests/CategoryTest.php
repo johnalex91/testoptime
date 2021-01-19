@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints\TypeValidator;
 use Symfony\Component\Validator\Constraints\Type;
 
 use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\ValidatorBuilder;
 use App\Entity\Category;
 
 
@@ -38,6 +39,7 @@ class CategoryTest extends WebTestCase
         $client->request('GET', 'http://127.0.0.1:8000/category/form/1');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());         
     }
+
 
 
     /**
