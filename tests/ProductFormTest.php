@@ -17,6 +17,10 @@ use Symfony\Component\Form\Test\TypeTestCase;
 class ProductFormTest extends TypeTestCase
 {
 
+    public function testPruebaformproduct(){
+        $res = 1+1;
+        $this->assertEquals(2, $res);
+    }
 /*
     public function testSubmitvaliddata()
     {

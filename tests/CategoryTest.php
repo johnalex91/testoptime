@@ -16,21 +16,20 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 class CategoryTest extends WebTestCase
 {
-    /**
-     * Lista de Categorias Code
-     */
-    /*
-    public function testListcategory(){
 
-        $client = static::createClient();
-        $client->request('GET', 'http://127.0.0.1:8000/category?page=1');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());        
+
+    public function testPruebacategoria(){
+        $res = 1+1;
+        $this->assertEquals(2, $res);
     }
-    */
+
+    
+    
     /**
      * Formulario get id = 0 || !=0
      */
-    public function testForm(){
+    
+    public function test_response_call_form_new_edit(){
 
         $client = static::createClient();
         $client->request('GET', 'http://127.0.0.1:8000/category/form/0');
@@ -40,9 +39,11 @@ class CategoryTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());         
     }
 
+
     /**
      * Crear informacion  id = 0 || !=0
      */
+    /*
     public function testFormvalidar(){
 
         $client = static::createClient();
@@ -54,6 +55,7 @@ class CategoryTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode()); 
         
     }
+    */
 
 
 

@@ -18,7 +18,13 @@ class CategoryFormTest extends TypeTestCase
 {
 
 
-    public function testSubmitvaliddata()
+
+    public function testPruebaformcategoria(){
+        $res = 1+1;
+        $this->assertEquals(2, $res);
+    }
+    
+    public function test_submit_form_category()
     {
         $formData = [
             'name' => 'categoria05',
@@ -33,17 +39,7 @@ class CategoryFormTest extends TypeTestCase
         $this->assertTrue($form->isSynchronized());
     }
 
-    public function testCustomFormView()
-    {
-        $formData = new Category();
-        // ... prepare the data as you need
 
-        // The initial data may be used to compute custom view variables
-        $view = $this->factory->create(CategoryForm::class, $formData)
-            ->createView();
 
-        $this->assertArrayHasKey('name', $view->vars);
-        var_dump($view->vars['name']);
-    }
 
 }
